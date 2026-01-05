@@ -38,9 +38,10 @@ export function Register() {
         role: 'Passenger',
       });
       navigate('/');
-    } catch (err: any) {
-      const errorMessage = err.response?.data?.message || 'Failed to register. Please try again.';
-      const errors = err.response?.data?.errors;
+    } catch (err) {
+      const error = err as { response?: { data?: { message?: string; errors?: string[] } } };
+      const errorMessage = error.response?.data?.message || 'Failed to register. Please try again.';
+      const errors = error.response?.data?.errors;
       if (errors && Array.isArray(errors)) {
         setError(`${errorMessage}: ${errors.join(', ')}`);
       } else {

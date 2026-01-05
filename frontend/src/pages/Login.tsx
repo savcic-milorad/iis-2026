@@ -19,8 +19,9 @@ export function Login() {
     try {
       await login({ email, password });
       navigate('/');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to login. Please try again.');
+    } catch (err) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Failed to login. Please try again.');
     } finally {
       setIsLoading(false);
     }
