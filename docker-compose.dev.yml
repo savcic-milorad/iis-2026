@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # SQL Server database only for development
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: transport-system-db-dev
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=DevPassword123!
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_dev_data:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P DevPassword123! -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    networks:
+      - transport-network
+
+volumes:
+  sqlserver_dev_data:
+    driver: local
+
+networks:
+  transport-network:
+    driver: bridge

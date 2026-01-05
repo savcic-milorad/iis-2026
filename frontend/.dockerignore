@@ -1,0 +1,17 @@
+node_modules
+npm-debug.log
+yarn-error.log
+.git
+.gitignore
+.env
+.env.*
+dist
+coverage
+.vscode
+.idea
+**/.DS_Store
+**/Thumbs.db
+**/*.md
+README.md
+docker-compose*
+Dockerfile*
