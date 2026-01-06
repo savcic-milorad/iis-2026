@@ -126,6 +126,7 @@ TestResults/
 *.coveragexml
 
 # Code Coverage Results
+.claude
 code-coverage-results.md
 .claude/agents/backend-developer.md
 .claude/agents/frontend-developer.md

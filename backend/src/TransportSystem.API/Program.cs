@@ -77,6 +77,9 @@ builder.Services.AddAuthorization();
 // Register JWT Token Service
 builder.Services.AddScoped<JwtTokenService>();
 
+// Register Database Initializer
+builder.Services.AddScoped<DatabaseInitializer>();
+
 // Configure Swagger/OpenAPI with JWT support
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -127,6 +130,14 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+// Initialize and seed database in development
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var initializer = scope.ServiceProvider.GetRequiredService<DatabaseInitializer>();
+    await initializer.InitializeAsync();
+}
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
