@@ -80,6 +80,33 @@ builder.Services.AddScoped<JwtTokenService>();
 // Register Database Initializer
 builder.Services.AddScoped<DatabaseInitializer>();
 
+// Register DbContext interface
+builder.Services.AddScoped<TransportSystem.Application.Persistence.IApplicationDbContext>(provider =>
+    provider.GetRequiredService<ApplicationDbContext>());
+
+// Register Station Use Cases
+builder.Services.AddScoped<TransportSystem.Application.Stations.UseCases.CreateStationUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Stations.UseCases.UpdateStationUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Stations.UseCases.DeleteStationUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Stations.UseCases.GetStationUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Stations.UseCases.GetAllStationsUseCase>();
+
+// Register Driver Use Cases
+builder.Services.AddScoped<TransportSystem.Application.Drivers.UseCases.CreateDriverUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Drivers.UseCases.UpdateDriverUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Drivers.UseCases.DeleteDriverUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Drivers.UseCases.GetDriverUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Drivers.UseCases.GetAllDriversUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Drivers.UseCases.ChangeDriverStatusUseCase>();
+
+// Register Vehicle Use Cases
+builder.Services.AddScoped<TransportSystem.Application.Vehicles.UseCases.CreateVehicleUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Vehicles.UseCases.UpdateVehicleUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Vehicles.UseCases.DeleteVehicleUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Vehicles.UseCases.GetVehicleUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Vehicles.UseCases.GetAllVehiclesUseCase>();
+builder.Services.AddScoped<TransportSystem.Application.Vehicles.UseCases.ChangeVehicleStatusUseCase>();
+
 // Configure Swagger/OpenAPI with JWT support
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

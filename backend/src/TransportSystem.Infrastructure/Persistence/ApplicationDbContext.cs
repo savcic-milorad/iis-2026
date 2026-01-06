@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TransportSystem.Application.Persistence;
 using TransportSystem.Domain.Entities;
 using TransportSystem.Infrastructure.Identity;
 
@@ -9,7 +10,7 @@ namespace TransportSystem.Infrastructure.Persistence;
 /// Main database context for the Transport System
 /// Extends IdentityDbContext to include ASP.NET Core Identity tables
 /// </summary>
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
